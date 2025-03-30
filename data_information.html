@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Data Information</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #data-info {
+      margin-bottom: 2em;
+    }
+    #data-info p {
+      margin-bottom: 1.5em;
+      line-height: 1.6;
+    }
+    .fafsa-image {
+      text-align: center;
+      margin: 2em 0;
+    }
+    .fafsa-image img {
+      max-width: 80%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .image-caption {
+      font-style: italic;
+      color: #666;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Data Information</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="data_information.html">Data Information</a>
+        <a href="visualization.html">Visualizations</a>
+        <a href="conclusion.html">Conclusion</a>
+    </nav>
+  </header>
+
+  <section id="data-info">
+    <h2>Data Instruction</h2>
+    <p>
+      This dataset provides enrollment statistics for educational institutions across multiple U.S. states. It contains 1,271 entries, each with 20 attributes detailing institution names, locations (state and ZIP code), and school types (Public, Private, or Proprietary). The dataset tracks quarterly enrollment figures from Q1 to Q5, breaking down student populations into dependent and independent categories, along with total enrollment numbers. The data covers a diverse range of institutions, from large public universities to specialized vocational schools, making it useful for analyzing enrollment trends, institutional performance, and regional education patterns. Researchers, policymakers, and administrators can leverage this dataset to study seasonal fluctuations, compare student demographics, or assess the impact of institutional policies over time. The inclusion of multiple states allows for broader geographic insights, while the quarterly breakdown enables detailed temporal analysis.
+    </p>
+    <p>
+      Data source: <a href="https://studentaid.gov/data-center" target="_blank">Data Source Website</a>
+    </p>
+  </section>
+
+  <div class="fafsa-image">
+    <img src="https://www.judsonu.edu/wp-content/uploads/2024/09/FAFSA.jpeg-scaled.webp" alt="FAFSA Information Graphic">
+    <div class="image-caption">FAFSA application process overview</div>
+  </div>
+
+  <main>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="visualize.js"></script>
+</body>
+</html>
