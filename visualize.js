@@ -149,46 +149,37 @@ function drawMapPlotly(quarter) {
 }
 
 function drawScatterPlot(quarter) {
-  const depCol = "Dependent Students_" + quarter;
-  const indCol = "Independent Students_" + quarter;
-  const selectedState = document.getElementById("stateDropdown").value;
+  const depCol = `Dependent Students_${quarter}`;
+  const indCol = `Independent Students_${quarter}`;
 
-  const data = globalData.filter(d => d[depCol] && d[indCol] && (!selectedState || d.State === selectedState));
+  let data = globalData.filter(d => d[depCol] && d[indCol]);
+
+  if (selectedState !== "ALL") {
+    data = data.filter(d => d.State === selectedState);
+  }
 
   d3.select("#scatter-plot").html("");
   const svg = d3.select("#scatter-plot").append("svg").attr("width", 800).attr("height", 400);
 
-  const x = d3.scaleLinear().domain([0, d3.max(data, d => +d[depCol])]).range([60, 750]);
-  const y = d3.scaleLinear().domain([0, d3.max(data, d => +d[indCol])]).range([350, 50]);
+  const x = d3.scaleLinear()
+    .domain([0, d3.max(data, d => +d[depCol].replace(/,/g, ''))])
+    .range([60, 750]);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(data, d => +d[indCol].replace(/,/g, ''))])
+    .range([350, 50]);
 
   svg.append("g").attr("transform", "translate(0,350)").call(d3.axisBottom(x));
   svg.append("g").attr("transform", "translate(60,0)").call(d3.axisLeft(y));
 
-  svg.append("text")
-     .attr("class", "axis-label")
-     .attr("x", 400)
-     .attr("y", 390)
-     .style("text-anchor", "middle")
-     .text("Dependent Students");
-
-
-  svg.append("text")
-     .attr("class", "axis-label")
-     .attr("transform", "rotate(-90)")
-     .attr("x", -200)
-     .attr("y", 20)
-     .style("text-anchor", "middle")
-     .text("Independent Students");
-
   svg.selectAll("circle")
     .data(data)
     .join("circle")
-    .attr("cx", d => x(+d[depCol]))
-    .attr("cy", d => y(+d[indCol]))
+    .attr("cx", d => x(+d[depCol].replace(/,/g, '')))
+    .attr("cy", d => y(+d[indCol].replace(/,/g, '')))
     .attr("r", 4)
     .attr("fill", "#1f77b4");
 }
-
 
 function embedAltairScatter(quarter) {
   const cutoff = +document.getElementById("cutoffRange").value;
